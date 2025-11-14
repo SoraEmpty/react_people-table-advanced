@@ -104,11 +104,11 @@ export const PeoplePage = () => {
 
   const filteredByQuery = query
     ? people.filter(
-      person =>
-        person.name.toLowerCase().includes(normalizedQuery) ||
+        person =>
+          person.name.toLowerCase().includes(normalizedQuery) ||
           (person.fatherName || '').toLowerCase().includes(normalizedQuery) ||
           (person.motherName || '').toLowerCase().includes(normalizedQuery),
-    )
+      )
     : people;
 
   let filteredByCentury = filteredByQuery;
