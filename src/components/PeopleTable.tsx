@@ -6,14 +6,32 @@ interface Props {
   people: Person[];
   peopleByName: Map<string, Person>;
   onSort: (field: string) => void;
+  sortField: string | null;
+  order: string | null;
 }
 
 export const PeopleTable: React.FC<Props> = ({
   people,
   peopleByName,
   onSort,
+  sortField,
+  order,
 }) => {
   const { slug } = useParams();
+
+  function renderSortIcon(field: string) {
+    if (sortField !== field) {
+      return <span className="icon is-small ml-1">↕</span>;
+    }
+
+    if (order === 'desc') {
+      return <span className="icon is-small ml-1">↓</span>;
+    }
+
+    return <span className="icon is-small ml-1">↑</span>;
+  }
+
+
 
   return (
     <table
@@ -22,13 +40,28 @@ export const PeopleTable: React.FC<Props> = ({
     >
       <thead>
         <tr>
-          <th onClick={() => onSort('name')}>Name</th>
+          <th onClick={() => onSort('name')}>
+            <span>Name</span>
+            {renderSortIcon('name')}
+          </th>
 
-          <th onClick={() => onSort('sex')}>Sex</th>
+          <th onClick={() => onSort('sex')}>
+            <span>Sex</span>
+            {renderSortIcon('sex')}
+          </th>
 
-          <th onClick={() => onSort('born')}>Born</th>
+          <th onClick={() => onSort('born')}>
+            <span>Born</span>
+            {renderSortIcon('born')}
+          </th>
 
-          <th onClick={() => onSort('died')}>Died</th>
+          <th onClick={() => onSort('died')}>
+            <span>Died</span>
+            {renderSortIcon('died')}
+          </th>
+
+
+
           <th>Mother</th>
           <th>Father</th>
         </tr>
@@ -59,6 +92,7 @@ export const PeopleTable: React.FC<Props> = ({
               <td>{person.born}</td>
 
               <td>{person.died}</td>
+
               <td>
                 {mother ? (
                   <PersonLink person={mother} />
@@ -85,3 +119,4 @@ export const PeopleTable: React.FC<Props> = ({
     </table>
   );
 };
+

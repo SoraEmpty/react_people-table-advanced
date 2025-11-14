@@ -1,5 +1,5 @@
-import { useOutletContext, useParams } from "react-router-dom";
-import { Person } from "../types";
+import { useOutletContext, useParams } from 'react-router-dom';
+import { Person } from '../types';
 
 type ContextType = {
   people: Person[];
