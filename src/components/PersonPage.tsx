@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Person } from '../types';
-import { getPeople } from '../api';
+import { useOutletContext, useParams } from "react-router-dom";
+import { Person } from "../types";
+
+type ContextType = {
+  people: Person[];
+  peopleByName: Map<string, Person>;
+};
 
 export const PersonPage = () => {
   const { slug } = useParams();
-  const [person, setPerson] = useState<Person | null>(null);
+  const { people } = useOutletContext<ContextType>();
 
-  useEffect(() => {
-    getPeople().then(list => {
-      const found = list.find(p => p.slug === slug);
-
-      setPerson(found || null);
-    });
-  }, [slug]);
+  const person = people.find(p => p.slug === slug);
 
   if (!person) {
     return <h2 className="title">Person not found</h2>;

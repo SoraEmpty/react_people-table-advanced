@@ -179,11 +179,10 @@ export const PeoplePage = () => {
                 people={finalPeople}
                 peopleByName={peopleByName}
                 onSort={toggleSort}
-                sortField={sortField}
-                order={order}
               />
 
-              <Outlet />
+                <Outlet context={{ people, peopleByName }} />
+
             </>
           )}
         </div>

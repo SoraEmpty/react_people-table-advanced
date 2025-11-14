@@ -6,8 +6,6 @@ interface Props {
   people: Person[];
   peopleByName: Map<string, Person>;
   onSort: (field: string) => void;
-  order: string | null;
-  sortField: string | null;
 }
 
 export const PeopleTable: React.FC<Props> = ({
